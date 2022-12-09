@@ -68,7 +68,7 @@ func check_inside_clouds(clouds):
 		var c_ref = weakref(c)
 		if c_ref.get_ref() and c.is_opponent_inside_this_cloud:
 			return true
-		return false
+	return false
 
 func push_potion(potion):
 	if(current_potions_number < max_potions):

@@ -7,8 +7,12 @@ var is_fizzling = false
 var is_opponent_inside_this_cloud = false
 
 func _frame_0():
+	#Add cloud to active clouds in Doctor to keep track if the opponent inside one of the clouds and avoid stacking damage
 	host.creator.active_clouds.append(self)
+	#Set sprite and alpha
 	host.sprite.rotation = 0
+	$"%Sprite".modulate -= Color(0, 0, 0, 0.5)
+	
 	#Set grounded or air sprite
 	if host.get_pos().y > y_offset_from_ground:
 		host.set_pos(host.get_pos().x, y_offset_from_ground)
