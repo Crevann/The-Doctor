@@ -1,0 +1,13 @@
+{
+  "name": "doctor",
+  "friendly_name": "Doctor",
+  "description": "A Plague doctor with a potion crafting gimmick",
+  "author": "Crevan and Vitalian",
+  "version": "0.2.1",
+  "link": "",
+  "id": "41289",
+  "requires": [""],
+  "overwrites": false,
+  "client_side": true,
+  "priority": 0,
+}

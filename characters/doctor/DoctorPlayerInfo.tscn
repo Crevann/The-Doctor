@@ -1,0 +1,77 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/PlayerInfo.tscn" type="PackedScene" id=1]
+[ext_resource path="res://doctor/characters/doctor/DoctorPlayerInfo.gd" type="Script" id=2]
+[ext_resource path="res://doctor/characters/doctor/potion_spriteframes.tres" type="SpriteFrames" id=3]
+
+[node name="PlayerInfo" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." index="0"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_constants/separation = 0
+
+[node name="Control" type="Control" parent="HBoxContainer" index="0"]
+margin_right = 20.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 20, 0 )
+mouse_filter = 2
+
+[node name="FlaskControl" type="Control" parent="HBoxContainer" index="1"]
+margin_left = 20.0
+margin_right = 52.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 32, 0 )
+
+[node name="Flask1" type="AnimatedSprite" parent="HBoxContainer/FlaskControl" index="0"]
+unique_name_in_owner = true
+frames = ExtResource( 3 )
+animation = "flask_ui"
+offset = Vector2( 16, 20 )
+
+[node name="Control2" type="Control" parent="HBoxContainer" index="2"]
+margin_left = 52.0
+margin_right = 57.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 5, 0 )
+mouse_filter = 2
+
+[node name="FlaskControl2" type="Control" parent="HBoxContainer" index="3"]
+margin_left = 57.0
+margin_right = 89.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 32, 0 )
+
+[node name="Flask2" type="AnimatedSprite" parent="HBoxContainer/FlaskControl2" index="0"]
+unique_name_in_owner = true
+frames = ExtResource( 3 )
+animation = "flask_ui"
+offset = Vector2( 16, 20 )
+
+[node name="Control3" type="Control" parent="HBoxContainer" index="4"]
+margin_left = 89.0
+margin_right = 94.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 5, 0 )
+mouse_filter = 2
+
+[node name="FlaskControl3" type="Control" parent="HBoxContainer" index="5"]
+margin_left = 94.0
+margin_right = 126.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 32, 0 )
+
+[node name="Flask3" type="AnimatedSprite" parent="HBoxContainer/FlaskControl3" index="0"]
+unique_name_in_owner = true
+frames = ExtResource( 3 )
+animation = "flask_ui"
+offset = Vector2( 16, 20 )
+
+[node name="Control4" type="Control" parent="HBoxContainer" index="6"]
+margin_left = 126.0
+margin_right = 146.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 20, 0 )
+mouse_filter = 2

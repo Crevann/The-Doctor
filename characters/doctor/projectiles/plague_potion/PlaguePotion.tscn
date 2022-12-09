@@ -1,0 +1,105 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://doctor/characters/doctor/projectiles/Flask.gd" type="Script" id=1]
+[ext_resource path="res://doctor/characters/doctor/sprites/potions/darkgreenpot2.png" type="Texture" id=2]
+[ext_resource path="res://mechanics/Hitbox.gd" type="Script" id=3]
+[ext_resource path="res://projectile/BaseProjectile.tscn" type="PackedScene" id=4]
+[ext_resource path="res://characters/BaseChar.gdshader" type="Shader" id=5]
+[ext_resource path="res://doctor/characters/doctor/projectiles/plague_potion/Cloud.gd" type="Script" id=6]
+[ext_resource path="res://doctor/characters/doctor/sounds/flask_break.wav" type="AudioStream" id=7]
+[ext_resource path="res://doctor/characters/doctor/sprites/potions/darkgreenpot.png" type="Texture" id=8]
+[ext_resource path="res://doctor/characters/doctor/sprites/potions/darkgreenpot3.png" type="Texture" id=9]
+[ext_resource path="res://doctor/characters/doctor/sprites/potions/darkgreenpot4.png" type="Texture" id=10]
+[ext_resource path="res://doctor/characters/doctor/sprites/plague_cloud.png" type="Texture" id=11]
+[ext_resource path="res://doctor/characters/doctor/sprites/plague_cloud_ground.png" type="Texture" id=12]
+
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+shader = ExtResource( 5 )
+shader_param/color = Color( 1, 1, 1, 1 )
+shader_param/max_color_distance = 0.01
+shader_param/super_dim = false
+shader_param/use_outline = false
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 11 ) ],
+"loop": true,
+"name": "cloud",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ) ],
+"loop": true,
+"name": "cloud_ground",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 2 ), ExtResource( 9 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="PlaguePotion" instance=ExtResource( 4 )]
+material = SubResource( 2 )
+gravity = "0.3"
+max_air_speed = "8"
+max_fall_speed = "10"
+deletes_other_projectiles = false
+
+[node name="Sprite" parent="Flip" index="0"]
+z_index = 10
+frames = SubResource( 1 )
+
+[node name="FlaskBreak" type="AudioStreamPlayer2D" parent="Sounds" index="0"]
+stream = ExtResource( 7 )
+
+[node name="CollisionBox" parent="." index="2"]
+width = 4
+height = 4
+
+[node name="Hurtbox" parent="." index="3"]
+width = 4
+height = 4
+
+[node name="Default" parent="StateMachine" index="0"]
+script = ExtResource( 1 )
+apply_forces = true
+apply_fric = true
+apply_grav = true
+sprite_animation = "default"
+anim_length = 12
+sprite_anim_length = 4
+ticks_per_frame = 3
+loop_animation = true
+move_speed = "8"
+_c_Homing_Options = 0
+homing = false
+homing_turn_speed = "3.0"
+homing_accel = "1.0"
+max_homing_speed = "10"
+start_homing = false
+lifetime = 50
+to_state = "Cloud"
+
+[node name="Hitbox" type="Node2D" parent="StateMachine/Default" index="0"]
+z_index = 1000
+script = ExtResource( 3 )
+width = 4
+height = 4
+damage = 20
+hitstun_ticks = 12
+screenshake_amount = 1
+knockback = "1"
+start_tick = 1
+always_on = true
+
+[node name="Cloud" type="Node2D" parent="StateMachine" index="1"]
+script = ExtResource( 6 )
+fallback_state = "Cloud"
+endless = true
+move_x = 0
+clash = false
+lifetime = 250
+fizzle_on_ground = false
+fizzle_on_walls = false

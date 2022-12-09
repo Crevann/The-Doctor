@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://doctor/characters/doctor/sprites/particles/glass_shard.png" type="Texture" id=1]
+[ext_resource path="res://fx/ParticleEffect.tscn" type="PackedScene" id=2]
+[ext_resource path="res://characters/BaseChar.gdshader" type="Shader" id=3]
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+shader = ExtResource( 3 )
+shader_param/color = Color( 1, 1, 1, 1 )
+shader_param/max_color_distance = 0.01
+shader_param/super_dim = false
+shader_param/use_outline = false
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="Curve" id=2]
+min_value = -360.0
+max_value = 360.0
+_data = [ Vector2( 0.00990099, -353.455 ), 0.0, 720.589, 0, 1, Vector2( 1, 360 ), 720.589, 0.0, 1, 0 ]
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0, 0.726257, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[node name="ParticleEffect" instance=ExtResource( 2 )]
+material = SubResource( 1 )
+free = false
+
+[node name="GlassShards" type="CPUParticles2D" parent="." index="1"]
+amount = 16
+lifetime = 0.5
+explosiveness = 1.0
+texture = ExtResource( 1 )
+direction = Vector2( 0, -1 )
+spread = 20.0
+initial_velocity = 170.0
+initial_velocity_random = 0.3
+linear_accel = -170.0
+linear_accel_random = 0.3
+angle = 90.0
+angle_random = 1.0
+angle_curve = SubResource( 2 )
+scale_amount = 1.5
+scale_amount_random = 1.0
+color_ramp = SubResource( 3 )

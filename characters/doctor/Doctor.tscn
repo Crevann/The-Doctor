@@ -1,0 +1,520 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://doctor/characters/doctor/Doctor.gd" type="Script" id=1]
+[ext_resource path="res://characters/states/CharState.gd" type="Script" id=2]
+[ext_resource path="res://doctor/characters/doctor/states/ThrowPotion.gd" type="Script" id=3]
+[ext_resource path="res://characters/BaseChar.tscn" type="PackedScene" id=4]
+[ext_resource path="res://mechanics/Hitbox.gd" type="Script" id=5]
+[ext_resource path="res://characters/BaseChar.gdshader" type="Shader" id=6]
+[ext_resource path="res://doctor/characters/doctor/sprites/default_actions/Idle.png" type="Texture" id=7]
+[ext_resource path="res://doctor/characters/doctor/action_ui_data/ThrowBombUIData.tscn" type="PackedScene" id=8]
+[ext_resource path="res://doctor/characters/doctor/DoctorPlayerInfo.tscn" type="PackedScene" id=9]
+[ext_resource path="res://doctor/characters/doctor/states/CraftPotion.gd" type="Script" id=10]
+[ext_resource path="res://doctor/characters/doctor/states/CraftFlask.gd" type="Script" id=11]
+[ext_resource path="res://doctor/characters/doctor/doctor_spriteframes.tres" type="SpriteFrames" id=12]
+[ext_resource path="res://doctor/characters/doctor/sounds/tick_damage.wav" type="AudioStream" id=13]
+[ext_resource path="res://doctor/characters/doctor/sounds/cure.wav" type="AudioStream" id=14]
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+shader = ExtResource( 6 )
+shader_param/color = Color( 1, 1, 1, 1 )
+shader_param/max_color_distance = 0.01
+shader_param/super_dim = false
+shader_param/use_outline = false
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+shader = ExtResource( 6 )
+shader_param/color = Color( 1, 1, 1, 1 )
+shader_param/max_color_distance = 0.01
+shader_param/super_dim = false
+shader_param/use_outline = false
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+
+[node name="Doctor" instance=ExtResource( 4 )]
+material = SubResource( 1 )
+script = ExtResource( 1 )
+gravity = "0.8"
+ground_friction = "0.8"
+max_ground_speed = "8"
+max_air_speed = "8"
+max_fall_speed = "7"
+extra_state_variables = "current_potions_number
+prepared_potions
+active_clouds
+opponent_is_plagued
+opponent_is_poisoned
+remaining_plague_ticks
+remaining_poison_ticks"
+character_portrait = ExtResource( 7 )
+player_info_scene = ExtResource( 9 )
+
+[node name="Sprite" parent="Flip" index="0"]
+material = SubResource( 2 )
+frames = ExtResource( 12 )
+animation = "ThrowPotion"
+frame = 2
+offset = Vector2( 3, -18 )
+
+[node name="TickDamage" type="AudioStreamPlayer2D" parent="Sounds" index="7"]
+stream = ExtResource( 13 )
+volume_db = -20.0
+bus = "Fx"
+
+[node name="Cure" type="AudioStreamPlayer2D" parent="Sounds" index="8"]
+stream = ExtResource( 14 )
+volume_db = -10.0
+bus = "Fx"
+
+[node name="CollisionBox" parent="." index="2"]
+y = -16
+width = 9
+height = 15
+
+[node name="Hurtbox" parent="." index="3"]
+width = 9
+height = 15
+
+[node name="CaneSlash" type="Node2D" parent="StateMachine" index="2"]
+script = ExtResource( 2 )
+apply_forces = true
+apply_fric = true
+apply_grav = true
+sprite_animation = "CaneSlash"
+anim_length = 20
+force_dir_x = "1"
+force_speed = "1"
+title = "Cane Slash"
+type = 1
+land_cancel = true
+interrupt_from_string = "Grounded
+GroundedAttack
+GroundedSpecial"
+interrupt_into_string = "Grounded
+GroundedAttack"
+hit_cancel_into_string = "Grounded
+GroundedAttack"
+
+[node name="Hitbox" type="Node2D" parent="StateMachine/CaneSlash" index="0"]
+z_index = 1000
+script = ExtResource( 5 )
+x = 27
+y = -20
+width = 11
+height = 18
+damage = 50
+hitstun_ticks = 20
+hitlag_ticks = 6
+dir_x = "0.5"
+dir_y = "-1"
+knockback = "4"
+grounded_hit_state = "HurtAerial"
+start_tick = 7
+active_ticks = 2
+
+[node name="CaneSweep" type="Node2D" parent="StateMachine" index="3"]
+script = ExtResource( 2 )
+apply_forces = true
+apply_fric = true
+apply_grav = true
+sprite_animation = "CaneSweep"
+anim_length = 24
+ticks_per_frame = 2
+force_dir_x = "1"
+force_speed = "2"
+title = "Cane Sweep"
+type = 1
+self_hit_cancellable = false
+interrupt_from_string = "Grounded
+GroundedAttack
+GroundedSpecial"
+interrupt_into_string = "Grounded
+GroundedAttack
+"
+hit_cancel_into_string = "Grounded
+GroundedAttack
+GroundedSpecial"
+
+[node name="Hitbox" type="Node2D" parent="StateMachine/CaneSweep" index="0"]
+z_index = 1000
+script = ExtResource( 5 )
+x = 25
+y = -5
+width = 14
+height = 5
+damage = 45
+hitstun_ticks = 18
+hits_vs_aerial = false
+hit_height = 2
+dir_y = "-1"
+knockback = "2"
+pushback_x = "0.5"
+grounded_hit_state = "HurtAerial"
+knockdown = true
+start_tick = 7
+active_ticks = 2
+
+[node name="CaneThrust" type="Node2D" parent="StateMachine" index="4"]
+script = ExtResource( 2 )
+apply_forces = true
+apply_grav = true
+sprite_animation = "CaneThrust"
+anim_length = 30
+ticks_per_frame = 3
+force_dir_x = "1"
+force_speed = "8"
+force_tick = 7
+title = "Cane Lunge"
+type = 1
+air_type = 2
+uses_air_movement = true
+self_hit_cancellable = false
+interrupt_from_string = "Grounded
+GroundedAttack
+Aerial"
+hit_cancel_into_string = "Grounded
+GroundedAttack
+Aerial"
+
+[node name="Hitbox" type="Node2D" parent="StateMachine/CaneThrust" index="0"]
+z_index = 1000
+script = ExtResource( 5 )
+x = 32
+y = -20
+width = 12
+height = 4
+damage = 60
+hitstun_ticks = 25
+hitlag_ticks = 7
+screenshake_amount = 6
+dir_y = "0"
+knockback = "6"
+start_tick = 7
+active_ticks = 18
+
+[node name="CaneOverhead" type="Node2D" parent="StateMachine" index="5"]
+script = ExtResource( 2 )
+apply_forces = true
+apply_fric = true
+apply_grav = true
+sprite_animation = "CaneOverhead"
+anim_length = 24
+ticks_per_frame = 2
+force_dir_x = "1"
+force_speed = "1"
+force_tick = 10
+title = "Cane Smack"
+type = 1
+self_hit_cancellable = false
+interrupt_from_string = "Grounded
+GroundedAttack
+"
+hit_cancel_into_string = "Grounded
+GroundedAttack
+"
+
+[node name="Hitbox_0" type="Node2D" parent="StateMachine/CaneOverhead" index="0"]
+z_index = 1000
+script = ExtResource( 5 )
+x = 22
+y = -20
+width = 9
+height = 17
+damage = 75
+hitlag_ticks = 7
+damage_proration = 1
+hit_height = 0
+dir_x = "0.3"
+dir_y = "0.6"
+knockback = "6"
+pushback_x = "1"
+start_tick = 9
+active_ticks = 2
+
+[node name="Hitbox_1" type="Node2D" parent="StateMachine/CaneOverhead" index="1"]
+z_index = 1000
+script = ExtResource( 5 )
+x = 13
+y = -33
+width = 10
+height = 8
+damage = 75
+hitlag_ticks = 7
+damage_proration = 1
+hit_height = 0
+dir_x = "0.3"
+dir_y = "0.6"
+knockback = "6"
+pushback_x = "1"
+start_tick = 9
+active_ticks = 2
+
+[node name="CaneASlash" type="Node2D" parent="StateMachine" index="6"]
+script = ExtResource( 2 )
+apply_forces = true
+apply_fric = true
+apply_grav = true
+sprite_animation = "CaneAirSlash"
+anim_length = 20
+ticks_per_frame = 2
+force_dir_x = "0.2"
+force_dir_y = "1"
+force_speed = "1"
+force_tick = 5
+title = "Cane D. Slash"
+type = 1
+air_type = 1
+land_cancel = true
+self_hit_cancellable = false
+interrupt_from_string = "Aerial
+AerialAttack
+"
+hit_cancel_into_string = "Grounded
+GroundedAttack
+AerialSpecial
+"
+
+[node name="Hitbox_0_0" type="Node2D" parent="StateMachine/CaneASlash" index="0"]
+z_index = 1000
+script = ExtResource( 5 )
+x = 23
+y = -10
+width = 9
+height = 14
+damage = 50
+hitstun_ticks = 25
+hitlag_ticks = 6
+hit_height = 0
+dir_x = "0.3"
+dir_y = "0.7"
+knockback = "5"
+pushback_x = "1"
+start_tick = 5
+active_ticks = 2
+
+[node name="Hitbox_0_1" type="Node2D" parent="StateMachine/CaneASlash" index="1"]
+z_index = 1000
+script = ExtResource( 5 )
+x = 9
+width = 16
+height = 9
+damage = 50
+hitstun_ticks = 25
+hitlag_ticks = 6
+hit_height = 0
+dir_x = "0.3"
+dir_y = "0.7"
+knockback = "5"
+pushback_x = "1"
+start_tick = 5
+active_ticks = 2
+
+[node name="Hitbox_1_0" type="Node2D" parent="StateMachine/CaneASlash" index="2"]
+z_index = 1000
+script = ExtResource( 5 )
+y = 1
+width = 14
+height = 9
+damage = 50
+hitstun_ticks = 25
+hitlag_ticks = 6
+hit_height = 0
+dir_x = "0.3"
+dir_y = "0.7"
+knockback = "5"
+pushback_x = "1"
+start_tick = 7
+active_ticks = 2
+loop_active_ticks = 1
+
+[node name="Hitbox_1_1" type="Node2D" parent="StateMachine/CaneASlash" index="3"]
+z_index = 1000
+script = ExtResource( 5 )
+x = -13
+y = -13
+width = 7
+height = 14
+damage = 50
+hitstun_ticks = 25
+hitlag_ticks = 6
+hit_height = 0
+dir_x = "0.3"
+dir_y = "0.7"
+knockback = "5"
+pushback_x = "1"
+start_tick = 7
+active_ticks = 2
+loop_active_ticks = 1
+
+[node name="CraftPotion" type="Node2D" parent="StateMachine" index="7"]
+script = ExtResource( 10 )
+__meta__ = {
+"_editor_description_": ""
+}
+apply_forces = true
+apply_fric = true
+apply_grav = true
+sprite_animation = "CraftPotion"
+anim_length = 30
+ticks_per_frame = 2
+title = "Craft Potion"
+type = 2
+air_type = 2
+busy_interrupt_type = 2
+burst_cancellable = false
+burstable = false
+self_hit_cancellable = false
+self_interruptable = false
+instant_cancellable = false
+interrupt_from_string = "Grounded
+GroundedAttack
+Aerial
+AerialAttack"
+interrupt_into_string = "Craft
+GroundedMovement
+Jump"
+
+[node name="CraftPlague" type="Node2D" parent="StateMachine" index="8"]
+script = ExtResource( 11 )
+__meta__ = {
+"_editor_description_": ""
+}
+apply_forces = true
+apply_fric = true
+apply_grav = true
+sprite_animation = "GetPotion"
+anim_length = 15
+ticks_per_frame = 3
+title = "Plague Pot."
+type = 2
+air_type = 2
+busy_interrupt_type = 2
+burst_cancellable = false
+burstable = false
+self_hit_cancellable = false
+self_interruptable = false
+instant_cancellable = false
+interrupt_from_string = "Craft
+"
+interrupt_into_string = "Grounded
+GroundedAttack
+Aerial
+AerialAttack"
+
+[node name="CraftBoom" type="Node2D" parent="StateMachine" index="9"]
+script = ExtResource( 11 )
+__meta__ = {
+"_editor_description_": ""
+}
+apply_forces = true
+apply_fric = true
+apply_grav = true
+sprite_animation = "GetPotion"
+anim_length = 15
+ticks_per_frame = 3
+title = "Boom Pot."
+type = 2
+air_type = 2
+busy_interrupt_type = 2
+burst_cancellable = false
+burstable = false
+self_hit_cancellable = false
+self_interruptable = false
+instant_cancellable = false
+interrupt_from_string = "Craft
+"
+interrupt_into_string = "Grounded
+GroundedAttack
+Aerial
+AerialAttack"
+potion = 1
+
+[node name="CraftPoison" type="Node2D" parent="StateMachine" index="10"]
+script = ExtResource( 11 )
+__meta__ = {
+"_editor_description_": ""
+}
+apply_forces = true
+apply_fric = true
+apply_grav = true
+sprite_animation = "GetPotion"
+anim_length = 15
+ticks_per_frame = 3
+title = "Poison Pot."
+type = 2
+air_type = 2
+busy_interrupt_type = 2
+burst_cancellable = false
+burstable = false
+self_hit_cancellable = false
+self_interruptable = false
+instant_cancellable = false
+interrupt_from_string = "Craft
+"
+interrupt_into_string = "Grounded
+GroundedAttack
+Aerial
+AerialAttack"
+potion = 2
+
+[node name="CraftAcidPillar" type="Node2D" parent="StateMachine" index="11"]
+script = ExtResource( 11 )
+__meta__ = {
+"_editor_description_": ""
+}
+apply_forces = true
+apply_fric = true
+apply_grav = true
+sprite_animation = "GetPotion"
+anim_length = 15
+ticks_per_frame = 3
+title = "Acid Pot."
+type = 2
+air_type = 2
+busy_interrupt_type = 2
+burst_cancellable = false
+burstable = false
+self_hit_cancellable = false
+self_interruptable = false
+instant_cancellable = false
+interrupt_from_string = "Craft
+"
+interrupt_into_string = "Grounded
+GroundedAttack
+Aerial
+AerialAttack"
+potion = 3
+
+[node name="ThrowPotion" type="Node2D" parent="StateMachine" index="12"]
+script = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": ""
+}
+apply_forces = true
+apply_fric = true
+apply_grav = true
+sprite_animation = "ThrowPotion"
+anim_length = 20
+ticks_per_frame = 2
+title = "Throw Potion"
+type = 2
+data_ui_scene = ExtResource( 8 )
+air_type = 2
+busy_interrupt_type = 2
+self_hit_cancellable = false
+interrupt_from_string = "Grounded
+Aerial"
+interrupt_into_string = "Grounded
+Aerial"
+
+[node name="DashForward" parent="StateMachine" index="24"]
+dash_speed = 10
+
+[node name="DashBackward" parent="StateMachine" index="25"]
+dash_speed = 14
+
+[node name="AirDash" parent="StateMachine" index="30"]
+interrupt_from_string = ""
+interrupt_into_string = ""
