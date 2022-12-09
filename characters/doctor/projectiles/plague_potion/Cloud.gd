@@ -16,10 +16,10 @@ func _frame_0():
 	#Set grounded or air sprite
 	if host.get_pos().y > y_offset_from_ground:
 		host.set_pos(host.get_pos().x, y_offset_from_ground)
-		$"%Sprite".animation = "cloud_ground"
+		anim_name = "cloud_ground"
 	else:
-		$"%Sprite".animation = "cloud"
-		
+		anim_name = "cloud"
+
 func _tick():
 	._tick()
 	#Get opponent distance

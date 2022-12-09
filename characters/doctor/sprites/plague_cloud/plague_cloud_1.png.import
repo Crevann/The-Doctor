@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/plague_cloud.png-187e1c9d80c6dcf89044e66e4f7c3895.stex"
+path="res://.import/plague_cloud_1.png-099f8baf1435c7749b67fa35fb7992a0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://doctor/characters/doctor/sprites/plague_cloud.png"
-dest_files=[ "res://.import/plague_cloud.png-187e1c9d80c6dcf89044e66e4f7c3895.stex" ]
+source_file="res://doctor/characters/doctor/sprites/plague_cloud/plague_cloud_1.png"
+dest_files=[ "res://.import/plague_cloud_1.png-099f8baf1435c7749b67fa35fb7992a0.stex" ]
 
 [params]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://doctor/characters/doctor/projectiles/Flask.gd" type="Script" id=1]
 [ext_resource path="res://doctor/characters/doctor/sprites/potions/darkgreenpot2.png" type="Texture" id=2]
@@ -10,8 +10,10 @@
 [ext_resource path="res://doctor/characters/doctor/sprites/potions/darkgreenpot.png" type="Texture" id=8]
 [ext_resource path="res://doctor/characters/doctor/sprites/potions/darkgreenpot3.png" type="Texture" id=9]
 [ext_resource path="res://doctor/characters/doctor/sprites/potions/darkgreenpot4.png" type="Texture" id=10]
-[ext_resource path="res://doctor/characters/doctor/sprites/plague_cloud.png" type="Texture" id=11]
-[ext_resource path="res://doctor/characters/doctor/sprites/plague_cloud_ground.png" type="Texture" id=12]
+[ext_resource path="res://doctor/characters/doctor/sprites/plague_cloud/plague_cloud_ground_0.png" type="Texture" id=11]
+[ext_resource path="res://doctor/characters/doctor/sprites/plague_cloud/plague_cloud_0.png" type="Texture" id=12]
+[ext_resource path="res://doctor/characters/doctor/sprites/plague_cloud/plague_cloud_1.png" type="Texture" id=13]
+[ext_resource path="res://doctor/characters/doctor/sprites/plague_cloud/plague_cloud_ground_1.png" type="Texture" id=14]
 
 [sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
@@ -35,12 +37,12 @@ shader = SubResource( 3 )
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 11 ) ],
+"frames": [ ExtResource( 12 ), ExtResource( 13 ) ],
 "loop": true,
 "name": "cloud",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 12 ) ],
+"frames": [ ExtResource( 11 ), ExtResource( 14 ) ],
 "loop": true,
 "name": "cloud_ground",
 "speed": 5.0
@@ -109,6 +111,10 @@ always_on = true
 [node name="Cloud" type="Node2D" parent="StateMachine" index="1"]
 script = ExtResource( 6 )
 fallback_state = "Cloud"
+anim_length = 2
+sprite_anim_length = 2
+ticks_per_frame = 30
+loop_animation = true
 endless = true
 move_x = 0
 clash = false
