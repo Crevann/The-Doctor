@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://doctor/characters/doctor/Doctor.gd" type="Script" id=1]
 [ext_resource path="res://characters/states/CharState.gd" type="Script" id=2]
@@ -14,6 +14,8 @@
 [ext_resource path="res://doctor/characters/doctor/doctor_spriteframes.tres" type="SpriteFrames" id=12]
 [ext_resource path="res://doctor/characters/doctor/sounds/tick_damage.wav" type="AudioStream" id=13]
 [ext_resource path="res://doctor/characters/doctor/sounds/cure.wav" type="AudioStream" id=14]
+[ext_resource path="res://doctor/characters/doctor/particles/WhipTransformation.tscn" type="PackedScene" id=15]
+[ext_resource path="res://doctor/characters/doctor/sounds/whip_transform.wav" type="AudioStream" id=16]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
@@ -54,7 +56,7 @@ player_info_scene = ExtResource( 9 )
 [node name="Sprite" parent="Flip" index="0"]
 material = SubResource( 2 )
 frames = ExtResource( 12 )
-animation = "ThrowPotion"
+animation = "WhipThrust"
 frame = 2
 offset = Vector2( 3, -18 )
 
@@ -350,7 +352,56 @@ start_tick = 7
 active_ticks = 2
 loop_active_ticks = 1
 
-[node name="CraftPotion" type="Node2D" parent="StateMachine" index="7"]
+[node name="WhipThrust" type="Node2D" parent="StateMachine" index="7"]
+script = ExtResource( 2 )
+apply_forces = true
+apply_fric = true
+apply_grav = true
+sprite_animation = "WhipThrust"
+anim_length = 24
+force_dir_x = "1"
+force_speed = "2"
+force_tick = 13
+timed_particle_scene = ExtResource( 15 )
+timed_particle_position = Vector2( 0, -16 )
+timed_spawn_particle_tick = 2
+sfx = ExtResource( 16 )
+sfx_tick = 2
+sfx_volume = -5.0
+title = "Whip Thrust"
+type = 1
+air_type = 2
+self_hit_cancellable = false
+interrupt_from_string = "Grounded
+GroundedAttack
+GroundedSpecial
+Aerial"
+interrupt_into_string = "GroundedAttack
+GroundedSpecial
+AerialAttack
+AerialSpecial"
+
+[node name="Hitbox" type="Node2D" parent="StateMachine/WhipThrust" index="0"]
+z_index = 1000
+script = ExtResource( 5 )
+__meta__ = {
+"_editor_description_": ""
+}
+x = 75
+y = -17
+width = 43
+height = 8
+damage = 70
+hitstun_ticks = 25
+hitlag_ticks = 6
+victim_hitlag = 2
+dir_x = "0.1"
+dir_y = "-1"
+knockback = "2"
+start_tick = 16
+active_ticks = 2
+
+[node name="CraftPotion" type="Node2D" parent="StateMachine" index="8"]
 script = ExtResource( 10 )
 __meta__ = {
 "_editor_description_": ""
@@ -378,7 +429,7 @@ interrupt_into_string = "Craft
 GroundedMovement
 Jump"
 
-[node name="CraftPlague" type="Node2D" parent="StateMachine" index="8"]
+[node name="CraftPlague" type="Node2D" parent="StateMachine" index="9"]
 script = ExtResource( 11 )
 __meta__ = {
 "_editor_description_": ""
@@ -405,7 +456,7 @@ GroundedAttack
 Aerial
 AerialAttack"
 
-[node name="CraftBoom" type="Node2D" parent="StateMachine" index="9"]
+[node name="CraftBoom" type="Node2D" parent="StateMachine" index="10"]
 script = ExtResource( 11 )
 __meta__ = {
 "_editor_description_": ""
@@ -433,7 +484,7 @@ Aerial
 AerialAttack"
 potion = 1
 
-[node name="CraftPoison" type="Node2D" parent="StateMachine" index="10"]
+[node name="CraftPoison" type="Node2D" parent="StateMachine" index="11"]
 script = ExtResource( 11 )
 __meta__ = {
 "_editor_description_": ""
@@ -461,7 +512,7 @@ Aerial
 AerialAttack"
 potion = 2
 
-[node name="CraftAcidPillar" type="Node2D" parent="StateMachine" index="11"]
+[node name="CraftAcidPillar" type="Node2D" parent="StateMachine" index="12"]
 script = ExtResource( 11 )
 __meta__ = {
 "_editor_description_": ""
@@ -489,7 +540,7 @@ Aerial
 AerialAttack"
 potion = 3
 
-[node name="ThrowPotion" type="Node2D" parent="StateMachine" index="12"]
+[node name="ThrowPotion" type="Node2D" parent="StateMachine" index="13"]
 script = ExtResource( 3 )
 __meta__ = {
 "_editor_description_": ""
@@ -511,12 +562,12 @@ Aerial"
 interrupt_into_string = "Grounded
 Aerial"
 
-[node name="DashForward" parent="StateMachine" index="24"]
+[node name="DashForward" parent="StateMachine" index="25"]
 dash_speed = 10
 
-[node name="DashBackward" parent="StateMachine" index="25"]
+[node name="DashBackward" parent="StateMachine" index="26"]
 dash_speed = 14
 
-[node name="AirDash" parent="StateMachine" index="30"]
+[node name="AirDash" parent="StateMachine" index="31"]
 interrupt_from_string = ""
 interrupt_into_string = ""
