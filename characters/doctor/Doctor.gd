@@ -22,9 +22,9 @@ const PLAGUE_TICK_FREQUENCY = 60
 const MIN_OPPONENT_HP = 5
 
 var opponent_is_inside_cloud
-var opponent_is_plagued = true
+var opponent_is_plagued = false
 var current_potions_number
-var remaining_plague_ticks = 5
+var remaining_plague_ticks = -1
 
 var prepared_potions = []
 var active_clouds = []
