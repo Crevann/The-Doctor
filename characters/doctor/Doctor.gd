@@ -13,23 +13,18 @@ onready var PLAGUE_TICK_PARTICLES = preload("res://doctor/characters/doctor/part
 onready var CURED_PARTICLES = preload("res://doctor/characters/doctor/particles/CuredParticles.tscn")
 
 const CLOUD_TICK_DAMAGE = 5
-const PLAGUE_TICK_DAMAGE = 5
-const POISON_TICK_DAMAGE = 20
+const PLAGUE_TICK_DAMAGE = 20
 const max_potions = 3
 const PLAGUE_TICKS = 5
-const POISON_TICKS = 5
 const TICK_FREQUENCY = 5
 const PLAGUE_TICK_FREQUENCY = 60
-const POISON_TICK_FREQUENCY = 15
 
 const MIN_OPPONENT_HP = 5
 
 var opponent_is_inside_cloud
-var opponent_is_plagued = false
-var opponent_is_poisoned = false
+var opponent_is_plagued = true
 var current_potions_number
-var remaining_plague_ticks = -1
-var remaining_poison_ticks = -1
+var remaining_plague_ticks = 5
 
 var prepared_potions = []
 var active_clouds = []
@@ -56,9 +51,6 @@ func tick():
 	if remaining_plague_ticks > 0 and opponent.hp > MIN_OPPONENT_HP and current_tick % PLAGUE_TICK_FREQUENCY == PLAGUE_TICK_FREQUENCY - 1:
 		remaining_plague_ticks -= 1
 		deal_tick_damage(PLAGUE_TICK_DAMAGE, PLAGUE_TICK_PARTICLES)
-		
-	#Opponent is poisoned
-	#Poison TODO, same as Plague
 		
 func check_inside_clouds(clouds):
 	if clouds.empty():
@@ -89,7 +81,9 @@ func pop_potion():
 		print("No potions")
 		
 func deal_tick_damage(damage, effect):
-	opponent.take_damage(damage)
+	opponent.hp -= damage
+	opponent.gain_super_meter(damage / DAMAGE_SUPER_GAIN_DIVISOR)
+	gain_super_meter(damage / DAMAGE_TAKEN_SUPER_GAIN_DIVISOR)
 	opponent.spawn_particle_effect_relative(effect, Vector2(0, -16))
 	$Sounds/TickDamage.pitch_scale = rand_range(0.9, 1.1)
 	play_sound("TickDamage")

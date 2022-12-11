@@ -56,8 +56,8 @@ player_info_scene = ExtResource( 9 )
 [node name="Sprite" parent="Flip" index="0"]
 material = SubResource( 2 )
 frames = ExtResource( 12 )
-animation = "WhipThrust"
-frame = 2
+animation = "CaneAirNormal"
+frame = 3
 offset = Vector2( 3, -18 )
 
 [node name="TickDamage" type="AudioStreamPlayer2D" parent="Sounds" index="7"]
@@ -253,7 +253,52 @@ pushback_x = "1"
 start_tick = 9
 active_ticks = 2
 
-[node name="CaneASlash" type="Node2D" parent="StateMachine" index="6"]
+[node name="CaneAir" type="Node2D" parent="StateMachine" index="6"]
+script = ExtResource( 2 )
+apply_forces = true
+apply_fric = true
+apply_grav = true
+sprite_animation = "CaneAirNormal"
+anim_length = 20
+ticks_per_frame = 2
+force_dir_x = "1"
+force_dir_y = "0.8"
+force_speed = "2"
+force_tick = 7
+title = "Cane Slash"
+type = 1
+air_type = 1
+interrupt_from_string = "Aerial
+AerialAttack
+"
+interrupt_into_string = "GroundedAttack
+GroundedSpecial
+AerialAttack
+AerialSpecial"
+hit_cancel_into_string = "Grounded
+GroundedAttack
+AerialAttack
+AerialSpecial
+"
+
+[node name="Hitbox" type="Node2D" parent="StateMachine/CaneAir" index="0"]
+z_index = 1000
+script = ExtResource( 5 )
+x = 22
+y = -19
+width = 13
+height = 11
+damage = 50
+hitstun_ticks = 25
+hitlag_ticks = 6
+hit_height = 0
+dir_y = "-0.2"
+knockback = "3"
+pushback_x = "1"
+start_tick = 7
+active_ticks = 2
+
+[node name="CaneASlash" type="Node2D" parent="StateMachine" index="7"]
 script = ExtResource( 2 )
 apply_forces = true
 apply_fric = true
@@ -277,6 +322,7 @@ AerialAttack
 "
 hit_cancel_into_string = "Grounded
 GroundedAttack
+AerialAttack
 AerialSpecial
 "
 
@@ -352,7 +398,7 @@ start_tick = 7
 active_ticks = 2
 loop_active_ticks = 1
 
-[node name="WhipThrust" type="Node2D" parent="StateMachine" index="7"]
+[node name="WhipThrust" type="Node2D" parent="StateMachine" index="8"]
 script = ExtResource( 2 )
 apply_forces = true
 apply_fric = true
@@ -401,7 +447,7 @@ knockback = "2"
 start_tick = 16
 active_ticks = 2
 
-[node name="CraftPotion" type="Node2D" parent="StateMachine" index="8"]
+[node name="CraftPotion" type="Node2D" parent="StateMachine" index="9"]
 script = ExtResource( 10 )
 __meta__ = {
 "_editor_description_": ""
@@ -429,7 +475,7 @@ interrupt_into_string = "Craft
 GroundedMovement
 Jump"
 
-[node name="CraftPlague" type="Node2D" parent="StateMachine" index="9"]
+[node name="CraftPlague" type="Node2D" parent="StateMachine" index="10"]
 script = ExtResource( 11 )
 __meta__ = {
 "_editor_description_": ""
@@ -456,7 +502,7 @@ GroundedAttack
 Aerial
 AerialAttack"
 
-[node name="CraftBoom" type="Node2D" parent="StateMachine" index="10"]
+[node name="CraftBoom" type="Node2D" parent="StateMachine" index="11"]
 script = ExtResource( 11 )
 __meta__ = {
 "_editor_description_": ""
@@ -484,7 +530,7 @@ Aerial
 AerialAttack"
 potion = 1
 
-[node name="CraftPoison" type="Node2D" parent="StateMachine" index="11"]
+[node name="CraftPoison" type="Node2D" parent="StateMachine" index="12"]
 script = ExtResource( 11 )
 __meta__ = {
 "_editor_description_": ""
@@ -512,7 +558,7 @@ Aerial
 AerialAttack"
 potion = 2
 
-[node name="CraftAcidPillar" type="Node2D" parent="StateMachine" index="12"]
+[node name="CraftAcidPillar" type="Node2D" parent="StateMachine" index="13"]
 script = ExtResource( 11 )
 __meta__ = {
 "_editor_description_": ""
@@ -540,7 +586,7 @@ Aerial
 AerialAttack"
 potion = 3
 
-[node name="ThrowPotion" type="Node2D" parent="StateMachine" index="13"]
+[node name="ThrowPotion" type="Node2D" parent="StateMachine" index="14"]
 script = ExtResource( 3 )
 __meta__ = {
 "_editor_description_": ""
@@ -562,12 +608,12 @@ Aerial"
 interrupt_into_string = "Grounded
 Aerial"
 
-[node name="DashForward" parent="StateMachine" index="25"]
+[node name="DashForward" parent="StateMachine" index="26"]
 dash_speed = 10
 
-[node name="DashBackward" parent="StateMachine" index="26"]
+[node name="DashBackward" parent="StateMachine" index="27"]
 dash_speed = 14
 
-[node name="AirDash" parent="StateMachine" index="31"]
+[node name="AirDash" parent="StateMachine" index="32"]
 interrupt_from_string = ""
 interrupt_into_string = ""
