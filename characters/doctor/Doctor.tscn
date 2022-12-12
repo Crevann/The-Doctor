@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://doctor/characters/doctor/Doctor.gd" type="Script" id=1]
 [ext_resource path="res://characters/states/CharState.gd" type="Script" id=2]
@@ -18,6 +18,8 @@
 [ext_resource path="res://doctor/characters/doctor/sounds/whip_transform.wav" type="AudioStream" id=16]
 [ext_resource path="res://doctor/characters/doctor/states/WhipState.gd" type="Script" id=17]
 [ext_resource path="res://doctor/characters/doctor/states/supers/InstantPotion.gd" type="Script" id=18]
+[ext_resource path="res://doctor/characters/doctor/sounds/potion_crafted.wav" type="AudioStream" id=19]
+[ext_resource path="res://doctor/characters/doctor/particles/PotionCraftedParticle.tscn" type="PackedScene" id=20]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
@@ -29,6 +31,15 @@ shader_param/use_outline = false
 shader_param/outline_color = Color( 0, 0, 0, 1 )
 
 [sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+shader = ExtResource( 6 )
+shader_param/color = Color( 1, 1, 1, 1 )
+shader_param/max_color_distance = 0.01
+shader_param/super_dim = false
+shader_param/use_outline = false
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="ShaderMaterial" id=3]
 resource_local_to_scene = true
 shader = ExtResource( 6 )
 shader_param/color = Color( 1, 1, 1, 1 )
@@ -58,9 +69,14 @@ player_info_scene = ExtResource( 9 )
 [node name="Sprite" parent="Flip" index="0"]
 material = SubResource( 2 )
 frames = ExtResource( 12 )
-animation = "Wait"
-frame = 0
+animation = "GetPotion"
+frame = 1
 offset = Vector2( 3, -18 )
+
+[node name="PotionParticles" parent="Flip/Particles" index="0" instance=ExtResource( 20 )]
+unique_name_in_owner = true
+material = SubResource( 3 )
+position = Vector2( 9, -39 )
 
 [node name="TickDamage" type="AudioStreamPlayer2D" parent="Sounds" index="7"]
 stream = ExtResource( 13 )
@@ -69,6 +85,11 @@ bus = "Fx"
 
 [node name="Cure" type="AudioStreamPlayer2D" parent="Sounds" index="8"]
 stream = ExtResource( 14 )
+volume_db = -10.0
+bus = "Fx"
+
+[node name="PotionCrafted" type="AudioStreamPlayer2D" parent="Sounds" index="9"]
+stream = ExtResource( 19 )
 volume_db = -10.0
 bus = "Fx"
 
