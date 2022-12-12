@@ -4,6 +4,7 @@ var knockback_direction
 onready var hitbox = $HitboxExplosion
 
 func _frame_0():
+	host.screen_bump()
 	var opponent_position = host.obj_local_center(host.creator.opponent)
 	var opponent_position_vector = Vector2(opponent_position.x, opponent_position.y)
 	var explosion_position_vector = Vector2(get_projectile_pos().x, get_projectile_pos().y)

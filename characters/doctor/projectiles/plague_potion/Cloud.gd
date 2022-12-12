@@ -22,6 +22,9 @@ func _frame_0():
 
 func _tick():
 	._tick()
+	#To avoid overlaying ghosts, set alpha to 0
+	if host.is_ghost:
+		$"%Sprite".modulate = Color($"%Sprite".modulate.r, $"%Sprite".modulate.g, $"%Sprite".modulate.b, 0.3)
 	#Get opponent distance
 	var opponent_position = host.creator.opponent.get_hurtbox_center()
 	var opponent_position_vector = Vector2(opponent_position.x, opponent_position.y)

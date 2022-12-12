@@ -71,12 +71,11 @@ material = SubResource( 2 )
 frames = ExtResource( 12 )
 animation = "GetPotion"
 frame = 1
-offset = Vector2( 3, -18 )
 
 [node name="PotionParticles" parent="Flip/Particles" index="0" instance=ExtResource( 20 )]
 unique_name_in_owner = true
 material = SubResource( 3 )
-position = Vector2( 9, -39 )
+position = Vector2( 6, -39 )
 
 [node name="TickDamage" type="AudioStreamPlayer2D" parent="Sounds" index="7"]
 stream = ExtResource( 13 )
@@ -94,7 +93,6 @@ volume_db = -10.0
 bus = "Fx"
 
 [node name="CollisionBox" parent="." index="2"]
-x = 3
 width = 9
 
 [node name="Hurtbox" parent="." index="3"]
@@ -522,7 +520,6 @@ AerialAttack"
 interrupt_into_string = "Craft
 GroundedMovement
 Jump"
-initiative_effect = true
 supers_used = 1
 
 [node name="CraftPlague" type="Node2D" parent="StateMachine" index="11"]
