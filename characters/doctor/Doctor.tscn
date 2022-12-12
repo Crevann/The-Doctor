@@ -551,6 +551,7 @@ interrupt_into_string = "Grounded
 GroundedAttack
 Aerial
 AerialAttack"
+particle_colors = Color( 0.0745098, 0.482353, 0.0745098, 1 )
 
 [node name="CraftBoom" type="Node2D" parent="StateMachine" index="12"]
 script = ExtResource( 11 )
@@ -579,6 +580,7 @@ GroundedAttack
 Aerial
 AerialAttack"
 potion = 1
+particle_colors = Color( 0.866667, 0.243137, 0.227451, 1 )
 
 [node name="CraftPoison" type="Node2D" parent="StateMachine" index="13"]
 script = ExtResource( 11 )
@@ -607,6 +609,7 @@ GroundedAttack
 Aerial
 AerialAttack"
 potion = 2
+particle_colors = Color( 0.254902, 0.882353, 0.254902, 1 )
 
 [node name="CraftAcidPillar" type="Node2D" parent="StateMachine" index="14"]
 script = ExtResource( 11 )
@@ -635,6 +638,7 @@ GroundedAttack
 Aerial
 AerialAttack"
 potion = 3
+particle_colors = Color( 0.980392, 0.988235, 0.262745, 1 )
 
 [node name="ThrowPotion" type="Node2D" parent="StateMachine" index="15"]
 script = ExtResource( 3 )
