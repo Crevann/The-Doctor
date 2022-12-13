@@ -169,6 +169,7 @@ width = 14
 height = 5
 damage = 45
 hitstun_ticks = 18
+hits_otg = true
 hits_vs_aerial = false
 hit_height = 2
 dir_y = "-1"
