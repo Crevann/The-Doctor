@@ -1,4 +1,4 @@
-extends ThrowPotion
+extends "res://doctor/characters/doctor/states/ThrowPotion.gd"
 
 const PROJECTILE_SPEEDS = [4, 7, 10]
 

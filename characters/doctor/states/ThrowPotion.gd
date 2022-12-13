@@ -1,7 +1,5 @@
 extends CharacterState
 
-class_name ThrowPotion
-
 const POTIONS_PROJECTILES = [preload("res://doctor/characters/doctor/projectiles/plague_potion/PlaguePotion.tscn"),
 							preload("res://doctor/characters/doctor/projectiles/boom_potion/BoomPotion.tscn")]
 
