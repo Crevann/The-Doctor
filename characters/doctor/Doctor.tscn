@@ -660,12 +660,12 @@ Aerial"
 interrupt_into_string = "Grounded
 Aerial"
 
-[node name="DashForward" parent="StateMachine" index="27"]
+[node name="DashForward" parent="StateMachine" index="32"]
 dash_speed = 10
 
-[node name="DashBackward" parent="StateMachine" index="28"]
+[node name="DashBackward" parent="StateMachine" index="33"]
 dash_speed = 14
 
-[node name="AirDash" parent="StateMachine" index="33"]
+[node name="AirDash" parent="StateMachine" index="37"]
 interrupt_from_string = ""
 interrupt_into_string = ""
