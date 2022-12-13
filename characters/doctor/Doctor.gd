@@ -3,7 +3,7 @@ extends Fighter
 enum potions{
 	plague,
 	boom,
-	freeze,
+	wind,
 	acid,
 	last
 }

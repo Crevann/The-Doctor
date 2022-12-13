@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://doctor/characters/doctor/Doctor.gd" type="Script" id=1]
 [ext_resource path="res://characters/states/CharState.gd" type="Script" id=2]
@@ -20,6 +20,11 @@
 [ext_resource path="res://doctor/characters/doctor/states/supers/InstantPotion.gd" type="Script" id=18]
 [ext_resource path="res://doctor/characters/doctor/sounds/potion_crafted.wav" type="AudioStream" id=19]
 [ext_resource path="res://doctor/characters/doctor/particles/PotionCraftedParticle.tscn" type="PackedScene" id=20]
+[ext_resource path="res://doctor/characters/doctor/states/ThrowAll.gd" type="Script" id=21]
+[ext_resource path="res://doctor/characters/doctor/action_ui_data/ThrowAllUIData.tscn" type="PackedScene" id=22]
+[ext_resource path="res://sound/common/hit3.wav" type="AudioStream" id=23]
+[ext_resource path="res://sound/common/hit4.wav" type="AudioStream" id=24]
+[ext_resource path="res://sound/common/hit5.wav" type="AudioStream" id=25]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
@@ -172,6 +177,7 @@ hitstun_ticks = 18
 hits_otg = true
 hits_vs_aerial = false
 hit_height = 2
+hit_sound = ExtResource( 23 )
 dir_y = "-1"
 knockback = "2"
 pushback_x = "0.5"
@@ -250,6 +256,7 @@ damage = 75
 hitlag_ticks = 7
 damage_proration = 1
 hit_height = 0
+hit_sound = ExtResource( 24 )
 dir_x = "0.3"
 dir_y = "0.6"
 knockback = "6"
@@ -268,6 +275,7 @@ damage = 75
 hitlag_ticks = 7
 damage_proration = 1
 hit_height = 0
+hit_sound = ExtResource( 24 )
 dir_x = "0.3"
 dir_y = "0.6"
 knockback = "6"
@@ -461,6 +469,7 @@ damage = 70
 hitstun_ticks = 25
 hitlag_ticks = 6
 victim_hitlag = 2
+hit_sound = ExtResource( 25 )
 dir_x = "0.1"
 dir_y = "-1"
 knockback = "2"
@@ -580,7 +589,7 @@ AerialAttack"
 potion = 1
 particle_colors = Color( 0.866667, 0.243137, 0.227451, 1 )
 
-[node name="CraftPoison" type="Node2D" parent="StateMachine" index="13"]
+[node name="CraftWind" type="Node2D" parent="StateMachine" index="13"]
 script = ExtResource( 11 )
 __meta__ = {
 "_editor_description_": ""
@@ -591,7 +600,7 @@ apply_grav = true
 sprite_animation = "GetPotion"
 anim_length = 15
 ticks_per_frame = 3
-title = "Poison Pot."
+title = "Wind Pot."
 type = 2
 air_type = 2
 busy_interrupt_type = 2
@@ -609,7 +618,7 @@ AerialAttack"
 potion = 2
 particle_colors = Color( 0.254902, 0.882353, 0.254902, 1 )
 
-[node name="CraftAcidPillar" type="Node2D" parent="StateMachine" index="14"]
+[node name="CraftAcid" type="Node2D" parent="StateMachine" index="14"]
 script = ExtResource( 11 )
 __meta__ = {
 "_editor_description_": ""
@@ -660,12 +669,34 @@ Aerial"
 interrupt_into_string = "Grounded
 Aerial"
 
-[node name="DashForward" parent="StateMachine" index="32"]
+[node name="ThrowAll" type="Node2D" parent="StateMachine" index="16"]
+script = ExtResource( 21 )
+__meta__ = {
+"_editor_description_": ""
+}
+apply_forces = true
+apply_fric = true
+apply_grav = true
+sprite_animation = "ThrowPotion"
+anim_length = 20
+ticks_per_frame = 2
+title = "Throw All"
+type = 2
+data_ui_scene = ExtResource( 22 )
+air_type = 2
+busy_interrupt_type = 2
+self_hit_cancellable = false
+interrupt_from_string = "Grounded
+Aerial"
+interrupt_into_string = "Grounded
+Aerial"
+
+[node name="DashForward" parent="StateMachine" index="33"]
 dash_speed = 10
 
-[node name="DashBackward" parent="StateMachine" index="33"]
+[node name="DashBackward" parent="StateMachine" index="34"]
 dash_speed = 14
 
-[node name="AirDash" parent="StateMachine" index="37"]
+[node name="AirDash" parent="StateMachine" index="38"]
 interrupt_from_string = ""
 interrupt_into_string = ""

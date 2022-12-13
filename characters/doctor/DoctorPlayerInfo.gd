@@ -1,13 +1,5 @@
 extends PlayerInfo
 
-enum potions{
-	plague,
-	boom,
-	freeze,
-	acid,
-	last
-}
-
 onready var flasks = [$"%Flask1", $"%Flask2", $"%Flask3"]
 
 func set_fighter(fighter):
@@ -24,7 +16,7 @@ func _on_update_flasks():
 					flasks[p].frame = 1
 				fighter.potions.boom:
 					flasks[p].frame = 2
-				fighter.potions.freeze:
+				fighter.potions.wind:
 					flasks[p].frame = 3
 				fighter.potions.acid:
 					flasks[p].frame = 4
