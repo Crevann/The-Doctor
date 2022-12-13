@@ -42,7 +42,7 @@ animations = [ {
 [node name="BoomPotion" instance=ExtResource( 4 )]
 material = SubResource( 2 )
 gravity = "0.3"
-max_air_speed = "8"
+air_friction = "0.1"
 max_fall_speed = "10"
 deletes_other_projectiles = false
 
@@ -74,13 +74,7 @@ anim_length = 12
 sprite_anim_length = 4
 ticks_per_frame = 3
 loop_animation = true
-move_speed = "8"
-_c_Homing_Options = 0
-homing = false
-homing_turn_speed = "3.0"
-homing_accel = "1.0"
-max_homing_speed = "10"
-start_homing = false
+move_x = 0
 lifetime = 50
 to_state = "Explosion"
 

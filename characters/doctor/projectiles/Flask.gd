@@ -1,4 +1,4 @@
-extends "res://projectile/DirProjectileDefault.gd"
+extends DefaultFireball
 
 export(String) var to_state
 const GLASS_PARTICLE_EFFECT = preload("res://doctor/characters/doctor/particles/GlassShards.tscn")
