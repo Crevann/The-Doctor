@@ -320,6 +320,11 @@ animations = [ {
 "name": "QuickSlash",
 "speed": 60.0
 }, {
+"frames": [ ExtResource( 95 ), ExtResource( 98 ), ExtResource( 95 ), ExtResource( 98 ), ExtResource( 95 ), ExtResource( 98 ), ExtResource( 95 ), ExtResource( 98 ), ExtResource( 95 ), ExtResource( 95 ), ExtResource( 96 ), ExtResource( 96 ), ExtResource( 96 ), ExtResource( 96 ), ExtResource( 96 ), ExtResource( 96 ), ExtResource( 96 ), ExtResource( 96 ), ExtResource( 96 ), ExtResource( 96 ), ExtResource( 96 ), ExtResource( 98 ), ExtResource( 97 ) ],
+"loop": true,
+"name": "RandomBS",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 36 ), ExtResource( 30 ), ExtResource( 39 ), ExtResource( 77 ) ],
 "loop": true,
 "name": "RollBackward",

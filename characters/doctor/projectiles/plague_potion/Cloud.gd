@@ -34,7 +34,6 @@ func _tick():
 	
 	#Set if opponent is inside cloud
 	if distance < DAMAGE_DISTANCE and !is_fizzling:
-		print("Distance: " + str(distance))
 		is_opponent_inside_this_cloud = true
 	else:
 		is_opponent_inside_this_cloud = false

@@ -118,7 +118,6 @@ screenshake_amount = 15
 whiff_sound = ExtResource( 15 )
 hit_sound = ExtResource( 7 )
 dir_y = "0"
-knockback = "10"
 launch_reversible = true
 pushback_x = "-1.0"
 grounded_hit_state = "HurtAerial"

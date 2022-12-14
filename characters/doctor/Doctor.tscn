@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://doctor/characters/doctor/Doctor.gd" type="Script" id=1]
 [ext_resource path="res://characters/states/CharState.gd" type="Script" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://sound/common/hit3.wav" type="AudioStream" id=23]
 [ext_resource path="res://sound/common/hit4.wav" type="AudioStream" id=24]
 [ext_resource path="res://sound/common/hit5.wav" type="AudioStream" id=25]
+[ext_resource path="res://doctor/characters/doctor/states/supers/RandomBS.gd" type="Script" id=26]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
@@ -74,8 +75,8 @@ player_info_scene = ExtResource( 9 )
 [node name="Sprite" parent="Flip" index="0"]
 material = SubResource( 2 )
 frames = ExtResource( 12 )
-animation = "GetPotion"
-frame = 1
+animation = "RandomBS"
+frame = 0
 
 [node name="PotionParticles" parent="Flip/Particles" index="0" instance=ExtResource( 20 )]
 unique_name_in_owner = true
@@ -601,6 +602,7 @@ sprite_animation = "GetPotion"
 anim_length = 15
 ticks_per_frame = 3
 title = "Wind Pot."
+show_in_menu = false
 type = 2
 air_type = 2
 busy_interrupt_type = 2
@@ -630,6 +632,7 @@ sprite_animation = "GetPotion"
 anim_length = 15
 ticks_per_frame = 3
 title = "Acid Pot."
+show_in_menu = false
 type = 2
 air_type = 2
 busy_interrupt_type = 2
@@ -691,12 +694,35 @@ Aerial"
 interrupt_into_string = "Grounded
 Aerial"
 
-[node name="DashForward" parent="StateMachine" index="33"]
+[node name="RandomBS" type="Node2D" parent="StateMachine" index="17"]
+script = ExtResource( 26 )
+__meta__ = {
+"_editor_description_": ""
+}
+apply_forces = true
+apply_fric = true
+apply_grav = true
+sprite_animation = "RandomBS"
+anim_length = 60
+ticks_per_frame = 2
+title = "Random Stuff"
+type = 3
+air_type = 2
+busy_interrupt_type = 2
+self_hit_cancellable = false
+interrupt_from_string = "Grounded
+Aerial"
+interrupt_into_string = "Grounded
+Aerial"
+super_level = 3
+supers_used = 3
+
+[node name="DashForward" parent="StateMachine" index="34"]
 dash_speed = 10
 
-[node name="DashBackward" parent="StateMachine" index="34"]
+[node name="DashBackward" parent="StateMachine" index="35"]
 dash_speed = 14
 
-[node name="AirDash" parent="StateMachine" index="38"]
+[node name="AirDash" parent="StateMachine" index="39"]
 interrupt_from_string = ""
 interrupt_into_string = ""
