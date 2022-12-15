@@ -140,6 +140,7 @@ dir_x = "0.5"
 dir_y = "-1"
 knockback = "4"
 grounded_hit_state = "HurtAerial"
+disable_collision = false
 start_tick = 7
 active_ticks = 2
 
@@ -184,6 +185,7 @@ knockback = "2"
 pushback_x = "0.5"
 grounded_hit_state = "HurtAerial"
 knockdown = true
+disable_collision = false
 start_tick = 7
 active_ticks = 2
 
@@ -222,6 +224,7 @@ hitlag_ticks = 7
 screenshake_amount = 6
 dir_y = "0"
 knockback = "6"
+disable_collision = false
 start_tick = 7
 active_ticks = 18
 
@@ -262,6 +265,7 @@ dir_x = "0.3"
 dir_y = "0.6"
 knockback = "6"
 pushback_x = "1"
+disable_collision = false
 start_tick = 9
 active_ticks = 2
 
@@ -281,6 +285,7 @@ dir_x = "0.3"
 dir_y = "0.6"
 knockback = "6"
 pushback_x = "1"
+disable_collision = false
 start_tick = 9
 active_ticks = 2
 
@@ -323,6 +328,7 @@ hit_height = 0
 dir_y = "-0.2"
 knockback = "3"
 pushback_x = "1"
+disable_collision = false
 start_tick = 7
 active_ticks = 2
 
@@ -369,6 +375,7 @@ dir_x = "0.3"
 dir_y = "0.7"
 knockback = "5"
 pushback_x = "1"
+disable_collision = false
 start_tick = 5
 active_ticks = 2
 
@@ -386,6 +393,7 @@ dir_x = "0.3"
 dir_y = "0.7"
 knockback = "5"
 pushback_x = "1"
+disable_collision = false
 start_tick = 5
 active_ticks = 2
 
@@ -403,6 +411,7 @@ dir_x = "0.3"
 dir_y = "0.7"
 knockback = "5"
 pushback_x = "1"
+disable_collision = false
 start_tick = 7
 active_ticks = 2
 loop_active_ticks = 1
@@ -422,6 +431,7 @@ dir_x = "0.3"
 dir_y = "0.7"
 knockback = "5"
 pushback_x = "1"
+disable_collision = false
 start_tick = 7
 active_ticks = 2
 loop_active_ticks = 1
@@ -474,6 +484,7 @@ hit_sound = ExtResource( 25 )
 dir_x = "0.1"
 dir_y = "-1"
 knockback = "2"
+disable_collision = false
 start_tick = 16
 active_ticks = 2
 
