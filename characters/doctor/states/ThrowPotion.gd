@@ -5,7 +5,6 @@ const PROJECTILE_Y_OFFSET = -2
 
 var dir_string
 var dir
-var spawned_potion
 var proj_x = 0
 var proj_y = 0
 
