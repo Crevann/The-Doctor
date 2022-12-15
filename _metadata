@@ -3,7 +3,7 @@
   "friendly_name": "Doctor",
   "description": "A Plague doctor with a potion crafting gimmick",
   "author": "Crevan and Vitalian",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "link": "",
   "id": "41289",
   "requires": [""],
