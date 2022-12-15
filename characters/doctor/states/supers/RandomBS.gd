@@ -1,10 +1,5 @@
-extends SuperMove
+extends "res://doctor/characters/doctor/states/base/PotionSuperState.gd"
 
-const POTIONS_PROJECTILES = [preload("res://doctor/characters/doctor/projectiles/plague_potion/PlaguePotion.tscn"),
-							preload("res://doctor/characters/doctor/projectiles/boom_potion/BoomPotion.tscn")]
-
-const PROJECTILE_X = 0
-const PROJECTILE_Y = -16
 #Barrage data
 const PROJECTILE_SPEED_MIN_X = 2
 const PROJECTILE_SPEED_MIN_Y = -10
@@ -33,19 +28,18 @@ func _tick():
 	if host.sprite.frame % POTION_FREQUENCY == 0 and host.sprite.frame <= 7:
 		proj_x = str(rng.randf_range(PROJECTILE_SPEED_MIN_X, PROJECTILE_SPEED_MAX_X) * host.get_facing_int())
 		proj_y = str(rng.randf_range(PROJECTILE_SPEED_MIN_Y, PROJECTILE_SPEED_MAX_Y))
-		throw_random_potion(proj_x, proj_y)
-
+		var potion = current_potion_to_spawn%2
+		throw(potion, proj_x, proj_y)
+	
 func _frame_42():
 	for i in POTION_CLUSTER_SIZE:
+		var potion = current_potion_to_spawn%2
 		proj_x = str((POTION_CLUSTER_X_SPEED + rng.randf_range(-POTION_CLUSTER_SPREAD_VARIATION, POTION_CLUSTER_SPREAD_VARIATION)) * host.get_facing_int())
 		proj_y = str(POTION_CLUSTER_Y_SPEED + rng.randf_range(0, POTION_CLUSTER_SPREAD_VARIATION))
-		var cluster_potion = throw_random_potion(proj_x, proj_y)
-	
-func throw_random_potion(proj_x, proj_y):
-	#var potion = POTIONS_PROJECTILES[rand_range(0, host.creator.potions.last)]
-	print(current_potion_to_spawn)
-	var potion = POTIONS_PROJECTILES[current_potion_to_spawn%2] #Until all potions are done
+		var cluster_potion = throw(potion, proj_x, proj_y)
+
+func throw(potion, proj_x, proj_y):
 	current_potion_to_spawn += 1
-	spawned_potion = host.spawn_object(potion, PROJECTILE_X, PROJECTILE_Y, true)
-	spawned_potion.apply_force(proj_x, proj_y)
-	return spawned_potion
+	print(current_potion_to_spawn)
+	.throw(potion, proj_x, proj_y)
+	
