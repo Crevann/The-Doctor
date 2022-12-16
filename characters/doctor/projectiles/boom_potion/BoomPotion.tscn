@@ -1,23 +1,14 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://characters/wizard/projectiles/sprites/flame_wave2.png" type="Texture" id=1]
-[ext_resource path="res://characters/wizard/projectiles/sprites/flame_wave1.png" type="Texture" id=2]
+[ext_resource path="res://doctor/characters/doctor/projectiles/Flask.tscn" type="PackedScene" id=1]
+[ext_resource path="res://doctor/characters/doctor/projectiles/boom_potion/boom_potion_frames.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://mechanics/Hitbox.gd" type="Script" id=3]
-[ext_resource path="res://projectile/BaseProjectile.tscn" type="PackedScene" id=4]
 [ext_resource path="res://characters/BaseChar.gdshader" type="Shader" id=5]
 [ext_resource path="res://doctor/characters/doctor/projectiles/boom_potion/Boom.gd" type="Script" id=6]
 [ext_resource path="res://sound/common/explosion3.wav" type="AudioStream" id=7]
-[ext_resource path="res://characters/wizard/projectiles/sprites/flame_wave3.png" type="Texture" id=8]
-[ext_resource path="res://characters/wizard/projectiles/sprites/flame_wave4.png" type="Texture" id=9]
-[ext_resource path="res://doctor/characters/doctor/projectiles/Flask.gd" type="Script" id=10]
-[ext_resource path="res://doctor/characters/doctor/sprites/potions/redpot.png" type="Texture" id=11]
-[ext_resource path="res://doctor/characters/doctor/sprites/potions/redpot3.png" type="Texture" id=12]
-[ext_resource path="res://doctor/characters/doctor/sprites/potions/redpot4.png" type="Texture" id=13]
-[ext_resource path="res://doctor/characters/doctor/sprites/potions/redpot2.png" type="Texture" id=14]
 [ext_resource path="res://sound/common/explosion2.wav" type="AudioStream" id=15]
-[ext_resource path="res://doctor/characters/doctor/sounds/flask_break.wav" type="AudioStream" id=16]
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
 shader = ExtResource( 5 )
 shader_param/color = Color( 1, 1, 1, 1 )
@@ -26,69 +17,14 @@ shader_param/super_dim = false
 shader_param/use_outline = false
 shader_param/outline_color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 1 ), ExtResource( 8 ), ExtResource( 9 ) ],
-"loop": true,
-"name": "Explosion",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 11 ), ExtResource( 14 ), ExtResource( 12 ), ExtResource( 13 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
-
-[node name="BoomPotion" instance=ExtResource( 4 )]
-material = SubResource( 2 )
-gravity = "0.3"
-air_friction = "0.1"
-max_fall_speed = "10"
-deletes_other_projectiles = false
+[node name="Flask" instance=ExtResource( 1 )]
+material = SubResource( 1 )
 
 [node name="Sprite" parent="Flip" index="0"]
-frames = SubResource( 1 )
-
-[node name="FlaskBreak" type="AudioStreamPlayer2D" parent="Sounds" index="0"]
-stream = ExtResource( 16 )
-volume_db = -10.0
-
-[node name="CollisionBox" parent="." index="2"]
-width = 4
-height = 4
-
-[node name="Hurtbox" parent="." index="3"]
-width = 4
-height = 4
+frames = ExtResource( 2 )
 
 [node name="Default" parent="StateMachine" index="0"]
-script = ExtResource( 10 )
-__meta__ = {
-"_editor_description_": ""
-}
-apply_forces = true
-apply_fric = true
-apply_grav = true
-sprite_animation = "default"
-anim_length = 12
-sprite_anim_length = 4
-ticks_per_frame = 3
-loop_animation = true
-move_x = 0
-lifetime = 50
 to_state = "Explosion"
-
-[node name="Hitbox" type="Node2D" parent="StateMachine/Default" index="0"]
-z_index = 1000
-script = ExtResource( 3 )
-width = 4
-height = 4
-damage = 20
-hitstun_ticks = 12
-screenshake_amount = 1
-knockback = "1"
-start_tick = 1
-always_on = true
 
 [node name="Explosion" type="Node2D" parent="StateMachine" index="1"]
 script = ExtResource( 6 )
