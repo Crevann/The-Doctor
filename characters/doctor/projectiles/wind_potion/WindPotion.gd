@@ -5,7 +5,8 @@ onready var pull_particles = preload("res://doctor/characters/doctor/particles/W
 onready var windbox = $"%WindBox"
 var host_pos
 
-const PULL_MAX_FORCE = 8
+const PULL_MAX_FORCE = 16
+const PULL_MIN_FORCE = 6
 const PULL_MAX_DISTANCE = 150
 
 var wind_pulled = []
@@ -42,13 +43,13 @@ func pull_object(obj):
 		pull_strength = PULL_MAX_FORCE * (1 - (distance.length()/PULL_MAX_DISTANCE))
 	else:
 		pull_strength = 0
-	if pull_strength < 0:
-		pull_strength = 0
+	pull_strength = clamp(pull_strength, PULL_MIN_FORCE, PULL_MAX_FORCE)
+	print(pull_strength)
 	var pull = direction * pull_strength
 	if obj.is_grounded():
 		pull.y = 0
 	var offset = Vector2(0, 0)
 	if obj is Fighter:
 		offset.y = -16
-	obj.spawn_particle_effect_relative(pull_particles, offset, direction)	
+	obj.spawn_particle_effect_relative(pull_particles, offset, direction)
 	obj.apply_force(str(pull.x), str(pull.y))
