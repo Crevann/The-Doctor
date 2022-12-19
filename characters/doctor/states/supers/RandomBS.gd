@@ -40,6 +40,6 @@ func _frame_42():
 
 func throw(potion, proj_x, proj_y):
 	current_potion_to_spawn += 1
-	print(current_potion_to_spawn)
+	print(current_potion_to_spawn%3)
 	.throw(potion, proj_x, proj_y)
 	

@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=128 format=2]
+[gd_resource type="SpriteFrames" load_steps=130 format=2]
 
 [ext_resource path="res://doctor/characters/doctor/sprites/attacks/cane_thrust/cane_thrust_5.png" type="Texture" id=1]
 [ext_resource path="res://doctor/characters/doctor/sprites/default_actions/Jump.png" type="Texture" id=2]
@@ -127,6 +127,8 @@
 [ext_resource path="res://doctor/characters/doctor/sprites/attacks/cane_air/cane_air_1.png" type="Texture" id=125]
 [ext_resource path="res://doctor/characters/doctor/sprites/attacks/cane_air/cane_air_4.png" type="Texture" id=126]
 [ext_resource path="res://doctor/characters/doctor/sprites/attacks/cane_air/cane_air_3.png" type="Texture" id=127]
+[ext_resource path="res://doctor/characters/doctor/sprites/attacks/random_bs/random_bs_0.png" type="Texture" id=128]
+[ext_resource path="res://doctor/characters/doctor/sprites/attacks/random_bs/random_bs_1.png" type="Texture" id=129]
 
 [resource]
 animations = [ {
@@ -320,7 +322,7 @@ animations = [ {
 "name": "QuickSlash",
 "speed": 60.0
 }, {
-"frames": [ ExtResource( 95 ), ExtResource( 98 ), ExtResource( 95 ), ExtResource( 98 ), ExtResource( 95 ), ExtResource( 98 ), ExtResource( 95 ), ExtResource( 98 ), ExtResource( 95 ), ExtResource( 95 ), ExtResource( 96 ), ExtResource( 96 ), ExtResource( 96 ), ExtResource( 96 ), ExtResource( 96 ), ExtResource( 96 ), ExtResource( 96 ), ExtResource( 96 ), ExtResource( 96 ), ExtResource( 96 ), ExtResource( 96 ), ExtResource( 98 ), ExtResource( 97 ) ],
+"frames": [ ExtResource( 128 ), ExtResource( 129 ), ExtResource( 128 ), ExtResource( 129 ), ExtResource( 128 ), ExtResource( 129 ), ExtResource( 129 ), ExtResource( 128 ), ExtResource( 95 ), ExtResource( 95 ), ExtResource( 95 ), ExtResource( 95 ), ExtResource( 95 ), ExtResource( 95 ), ExtResource( 95 ), ExtResource( 95 ), ExtResource( 95 ), ExtResource( 95 ), ExtResource( 95 ), ExtResource( 96 ), ExtResource( 98 ), ExtResource( 97 ) ],
 "loop": true,
 "name": "RandomBS",
 "speed": 5.0

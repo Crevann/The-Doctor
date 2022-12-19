@@ -76,7 +76,7 @@ player_info_scene = ExtResource( 9 )
 material = SubResource( 2 )
 frames = ExtResource( 12 )
 animation = "RandomBS"
-frame = 0
+frame = 3
 
 [node name="PotionParticles" parent="Flip/Particles" index="0" instance=ExtResource( 20 )]
 unique_name_in_owner = true
@@ -613,7 +613,6 @@ sprite_animation = "GetPotion"
 anim_length = 15
 ticks_per_frame = 3
 title = "Wind Pot."
-show_in_menu = false
 type = 2
 air_type = 2
 busy_interrupt_type = 2
