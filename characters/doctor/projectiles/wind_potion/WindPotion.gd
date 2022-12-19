@@ -1,6 +1,7 @@
 extends DefaultFireball
 
 onready var wind_particles = preload("res://doctor/characters/doctor/particles/WindPotionExplosion.tscn")
+onready var pull_particles = preload("res://doctor/characters/doctor/particles/WindPull.tscn")
 onready var windbox = $"%WindBox"
 var host_pos
 
@@ -46,4 +47,8 @@ func pull_object(obj):
 	var pull = direction * pull_strength
 	if obj.is_grounded():
 		pull.y = 0
+	var offset = Vector2(0, 0)
+	if obj is Fighter:
+		offset.y = -16
+	obj.spawn_particle_effect_relative(pull_particles, offset, direction)	
 	obj.apply_force(str(pull.x), str(pull.y))
