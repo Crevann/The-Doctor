@@ -4,8 +4,8 @@ onready var wind_particles = preload("res://doctor/characters/doctor/particles/W
 onready var windbox = $"%WindBox"
 var host_pos
 
-const PULL_MAX_FORCE = 5
-const PULL_MAX_DISTANCE = 128
+const PULL_MAX_FORCE = 8
+const PULL_MAX_DISTANCE = 150
 
 var wind_pulled = []
 var pulled_objs = []
@@ -16,6 +16,7 @@ func _tick():
 	if current_tick <= 0:
 		$"%Sprite".hide()
 		host.spawn_particle_effect_relative(wind_particles)
+		host.play_sound("Wind")
 	
 	host_pos = host.get_pos()
 	
@@ -37,11 +38,11 @@ func pull_object(obj):
 	var direction = distance.normalized()
 	var pull_strength
 	if distance.length() > 0:
-		pull_strength = PULL_MAX_FORCE * (distance.length()/PULL_MAX_DISTANCE)
-		print(distance.length()/PULL_MAX_DISTANCE)
+		pull_strength = PULL_MAX_FORCE * (1 - (distance.length()/PULL_MAX_DISTANCE))
 	else:
 		pull_strength = 0
-	print(pull_strength)
+	if pull_strength < 0:
+		pull_strength = 0
 	var pull = direction * pull_strength
 	if obj.is_grounded():
 		pull.y = 0

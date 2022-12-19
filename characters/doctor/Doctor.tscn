@@ -628,7 +628,7 @@ GroundedAttack
 Aerial
 AerialAttack"
 potion = 2
-particle_colors = Color( 0.254902, 0.882353, 0.254902, 1 )
+particle_colors = Color( 0, 1, 0.717647, 1 )
 
 [node name="CraftAcid" type="Node2D" parent="StateMachine" index="14"]
 script = ExtResource( 11 )
