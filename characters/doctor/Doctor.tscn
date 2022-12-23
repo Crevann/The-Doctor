@@ -75,8 +75,8 @@ player_info_scene = ExtResource( 9 )
 [node name="Sprite" parent="Flip" index="0"]
 material = SubResource( 2 )
 frames = ExtResource( 12 )
-animation = "RandomBS"
-frame = 3
+animation = "ThrowAll"
+frame = 0
 
 [node name="PotionParticles" parent="Flip/Particles" index="0" instance=ExtResource( 20 )]
 unique_name_in_owner = true
@@ -690,7 +690,7 @@ __meta__ = {
 apply_forces = true
 apply_fric = true
 apply_grav = true
-sprite_animation = "ThrowPotion"
+sprite_animation = "ThrowAll"
 anim_length = 20
 ticks_per_frame = 2
 title = "Throw All"

@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=130 format=2]
+[gd_resource type="SpriteFrames" load_steps=136 format=2]
 
 [ext_resource path="res://doctor/characters/doctor/sprites/attacks/cane_thrust/cane_thrust_5.png" type="Texture" id=1]
 [ext_resource path="res://doctor/characters/doctor/sprites/default_actions/Jump.png" type="Texture" id=2]
@@ -129,6 +129,12 @@
 [ext_resource path="res://doctor/characters/doctor/sprites/attacks/cane_air/cane_air_3.png" type="Texture" id=127]
 [ext_resource path="res://doctor/characters/doctor/sprites/attacks/random_bs/random_bs_0.png" type="Texture" id=128]
 [ext_resource path="res://doctor/characters/doctor/sprites/attacks/random_bs/random_bs_1.png" type="Texture" id=129]
+[ext_resource path="res://doctor/characters/doctor/sprites/attacks/random_bs/random_bs_2.png" type="Texture" id=130]
+[ext_resource path="res://doctor/characters/doctor/sprites/attacks/random_bs/random_bs_3.png" type="Texture" id=131]
+[ext_resource path="res://doctor/characters/doctor/sprites/attacks/throw_all/throw_all_3.png" type="Texture" id=132]
+[ext_resource path="res://doctor/characters/doctor/sprites/attacks/throw_all/throw_all_0.png" type="Texture" id=133]
+[ext_resource path="res://doctor/characters/doctor/sprites/attacks/throw_all/throw_all_1.png" type="Texture" id=134]
+[ext_resource path="res://doctor/characters/doctor/sprites/attacks/throw_all/throw_all_2.png" type="Texture" id=135]
 
 [resource]
 animations = [ {
@@ -322,7 +328,7 @@ animations = [ {
 "name": "QuickSlash",
 "speed": 60.0
 }, {
-"frames": [ ExtResource( 128 ), ExtResource( 129 ), ExtResource( 128 ), ExtResource( 129 ), ExtResource( 128 ), ExtResource( 129 ), ExtResource( 129 ), ExtResource( 128 ), ExtResource( 95 ), ExtResource( 95 ), ExtResource( 95 ), ExtResource( 95 ), ExtResource( 95 ), ExtResource( 95 ), ExtResource( 95 ), ExtResource( 95 ), ExtResource( 95 ), ExtResource( 95 ), ExtResource( 95 ), ExtResource( 96 ), ExtResource( 98 ), ExtResource( 97 ) ],
+"frames": [ ExtResource( 128 ), ExtResource( 129 ), ExtResource( 128 ), ExtResource( 129 ), ExtResource( 128 ), ExtResource( 129 ), ExtResource( 129 ), ExtResource( 128 ), ExtResource( 130 ), ExtResource( 130 ), ExtResource( 130 ), ExtResource( 130 ), ExtResource( 130 ), ExtResource( 130 ), ExtResource( 130 ), ExtResource( 130 ), ExtResource( 130 ), ExtResource( 130 ), ExtResource( 130 ), ExtResource( 130 ), ExtResource( 130 ), ExtResource( 131 ) ],
 "loop": true,
 "name": "RandomBS",
 "speed": 5.0
@@ -335,6 +341,11 @@ animations = [ {
 "frames": [ ExtResource( 36 ), ExtResource( 77 ), ExtResource( 39 ), ExtResource( 30 ) ],
 "loop": true,
 "name": "RollForward",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 133 ), ExtResource( 133 ), ExtResource( 134 ), ExtResource( 135 ), ExtResource( 132 ), ExtResource( 132 ) ],
+"loop": true,
+"name": "ThrowAll",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 95 ), ExtResource( 95 ), ExtResource( 96 ), ExtResource( 98 ), ExtResource( 97 ), ExtResource( 97 ) ],
